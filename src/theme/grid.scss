@@ -1,0 +1,173 @@
+@use "sass:map";
+
+@import "normalizecss/normalize";
+@import "~include-media/dist/_include-media.scss";
+@import "@material/layout-grid/mdc-layout-grid";
+
+/**
+ * Note: This should be replaced by Styled-Components /
+ * JS style class generation. SCSS mixins and variables 
+ * are not accessable for Styled-Components.
+ * 
+ * For the time being this is ok.
+ */
+
+:root {	
+	// should be responsive. Could be done using JS in future.
+	--dwn-gutter: 24px;
+	// map dwn-gutter to material gutter
+	--mdc-layout-grid-gutter-desktop: var(--dwn-gutter);
+}
+
+$breakpoints: (
+	small: (
+		"size": 0px,
+		"class": "s"
+	),
+	medium: (
+		"size": 640px,
+		"class": "m"
+	),
+	iphone5: (
+		"size": 320px,
+		"class": "ip5"
+	),
+	iphonex: (
+		"size": 375px,
+	"class": "ipx"
+	),
+	iphone12: (
+		"size": 390px,
+		"class": "ip12"
+	),
+	iphone11: (
+		"size": 414px,
+		"class": "ip11"
+	),
+	ipad: (
+		"size": 810px,
+		"class": "ipad"
+	),
+	large: (
+		"size": 1024px,
+		"class": "l"
+	),
+	redmi-note-8: (
+		"size": 1080px,
+		"class": "rn8"
+	),
+	galaxy-a51: (
+		"size": 1080px,
+		"class": "ga51"
+	),
+	xlarge: (
+		"size": 1200px,
+		"class": "xl"
+	),
+	xxlarge: (
+		"size": 1440px,
+		"class": "xxl"
+	)
+);
+
+/**
+ * Reset
+ */
+
+html {
+	box-sizing: border-box;
+	font-size: 100%;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+}
+
+%clearfix {
+	*zoom: 1;
+	&::before,
+	&::after { content: " "; display: table; }
+	&::after { clear: both; }
+}
+
+/**
+ * Helper clearfix class
+ */
+
+.clearfix { @extend %clearfix; }
+
+/**
+ * Generate grid classes procedually
+ */
+
+.grid {
+
+	@extend %clearfix; 
+	@include mdc-layout-grid("desktop", 0);
+	padding-left: 10%;
+	padding-right: 10%;
+	width: 100%; // Needed for inline usage when parent has display: flex
+
+	.grid {
+		padding: 0; // No padding for nested grids
+	}
+	
+	& > .inner {
+
+		@include mdc-layout-grid-inner("desktop", 12px, 0);
+
+		& > .col {
+			@each $breakpoint in map.keys($breakpoints) {
+				//@debug "$breakpoint: #{map.get($breakpoints, $breakpoint, "size")} class: #{map.get($breakpoints, $breakpoint, "class")}";
+					@include media(">#{map.get($breakpoints, $breakpoint, "size")}") {
+					@for $i from 1 through 12 {
+						// breakpoint
+						&.#{map.get($breakpoints, $breakpoint, "class")}-#{$i} {
+							@include mdc-layout-grid-cell("desktop", $i, 0);
+							&.msnr-item {
+								width: percentage( 1 / 12 * $i );
+							}
+						}
+						// offset
+						@debug "class: .col.#{map.get($breakpoints, $breakpoint, "class")}-off-#{$i}";
+						&.#{map.get($breakpoints, $breakpoint, "class")}-off-#{$i} {
+							grid-column-start: #{$i+1};
+						}
+					}
+				}
+			}
+		}
+
+	}	
+
+}
+
+/**
+ * hide-up
+ */
+
+@each $breakpoint in map.keys($breakpoints) {
+	//@debug "$breakpoint: #{map.get($breakpoints, $breakpoint, "size")} class: .hide-up-#{map.get($breakpoints, $breakpoint, "class")}";
+	@include media(">#{map.get($breakpoints, $breakpoint, "size")}") {
+		.hide-up-#{map.get($breakpoints, $breakpoint, "class")} {
+			display: none;							
+		}
+	}
+}
+
+/**
+ * show-up
+ */
+
+@each $breakpoint in map.keys($breakpoints) {
+	.show-up-#{map.get($breakpoints, $breakpoint, "class")} {
+		display: none;
+	}
+	@include media(">#{map.get($breakpoints, $breakpoint, "size")}") {
+		.show-up-#{map.get($breakpoints, $breakpoint, "class")} {
+			display: block;
+		}
+	}
+}
