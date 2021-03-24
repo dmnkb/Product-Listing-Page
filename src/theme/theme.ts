@@ -5,7 +5,7 @@ import "./styles.scss"
 const theme = createMuiTheme({
   typography: {
     allVariants: {
-      fontFamily: ['Work Sans', 'sans-serif'].join(","),
+      fontFamily: ['Sora', 'Work Sans', 'sans-serif'].join(","),
       color: '#26262C'
     },
     h1: {
@@ -57,7 +57,7 @@ const theme = createMuiTheme({
       default: "#fff"
     },
     primary: {
-       main: '#F9D7C0',
+       main: '#E89E9E',
        dark: '#3D3D48',
        light: '#fff'
     },

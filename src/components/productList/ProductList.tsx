@@ -16,7 +16,7 @@ const ProductList: React.FC<ProductListProps> = ({productData}) => {
         {productData.map( (data: any) => {
           console.log(data)
           return (
-            <div className="s-12 l-6 xl-4 col">
+            <div className="s-12 ipad-6 xl-4 col">
               <Card 
                 title={data.title}
                 image={data.media.thumbUrl}

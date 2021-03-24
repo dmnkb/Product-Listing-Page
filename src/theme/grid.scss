@@ -24,10 +24,6 @@ $breakpoints: (
 		"size": 0px,
 		"class": "s"
 	),
-	medium: (
-		"size": 640px,
-		"class": "m"
-	),
 	iphone5: (
 		"size": 320px,
 		"class": "ip5"
@@ -44,12 +40,16 @@ $breakpoints: (
 		"size": 414px,
 		"class": "ip11"
 	),
+	medium: (
+		"size": 640px,
+		"class": "m"
+	),
 	ipad: (
-		"size": 810px,
+		"size": 767px,
 		"class": "ipad"
 	),
 	large: (
-		"size": 1024px,
+		"size": 1023px,
 		"class": "l"
 	),
 	redmi-note-8: (

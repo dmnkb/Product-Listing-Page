@@ -61,10 +61,10 @@ const ListPage: React.FC = () => {
   return (
     <main className="grid">
       <div className="inner">
-        <aside className="s-12 ipad-4 l-3 col">
+        <aside className="s-12 l-3 col">
           <Filter handler={onFilterChanged} />
         </aside>
-        <main className="s-12 ipad-8 l-9 col">
+        <main className="s-12 l-9 col">
           {isLoading ? (
             <StyledCircularProgress />
           ) : (        

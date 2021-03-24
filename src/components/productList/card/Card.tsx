@@ -6,8 +6,12 @@ import {
   StyledCardMedia,
   StyledContent,
   StyledTitle,
-  StyledPrice
+  StyledPrice,
+  StyledFavoriteButton
 } from './styles'
+
+import HeartIconBorder from '@material-ui/icons/FavoriteBorder';
+import HeartIcon from '@material-ui/icons/Favorite';
 
 interface CardProps {
   readonly title: string
@@ -19,6 +23,13 @@ const Card: React.FC<CardProps> = ({title, image, price}) => {
 
   return (
     <StyledCard>
+      <StyledFavoriteButton 
+        aria-label="favorite"
+        color="primary"
+        className="fav-button"
+        >
+        <HeartIconBorder />
+      </StyledFavoriteButton>
       <StyledCardActionArea>
         {/* Fake image for the sake of demonstration */}
         <StyledCardMedia

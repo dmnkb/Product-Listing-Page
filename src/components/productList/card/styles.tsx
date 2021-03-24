@@ -6,25 +6,24 @@ import {
   CardActionArea,
   CardMedia,
   CardContent,
-  Typography  
+  Typography,
+  IconButton
 } from '@material-ui/core'
 
 export const StyledCard = styled(Card)`
   background: #fff;
   box-shadow: 0px 45px 80px rgba(42, 48, 51, 0.03), 0px 18.7999px 33.4221px rgba(42, 48, 51, 0.0215656), 0px 10.0513px 17.869px rgba(42, 48, 51, 0.0178832), 0px 5.6347px 10.0172px rgba(42, 48, 51, 0.015), 0px 2.99255px 5.32008px rgba(42, 48, 51, 0.0121168), 0px 1.24527px 2.21381px rgba(42, 48, 51, 0.00843437);
   border-radius: 10px;
+  position: relative;
+  &:hover {
+    .MuiCardMedia-root { transform: scale(1.1); }
+    ul.colors { bottom: 24px; }
+    .fav-button { opacity: 1; }
+  }
 `;
 
 export const StyledCardActionArea = styled(CardActionArea)`
-.MuiCardActionArea-focusHighlight { display: none; }
-  &:hover {
-    .MuiCardMedia-root {
-      transform: scale(1.1);
-    }
-    ul.colors {
-      bottom: 24px;
-    }
-  }
+  .MuiCardActionArea-focusHighlight { display: none; }
 `;
 
 export const StyledCardMedia = styled(CardMedia)`
@@ -56,7 +55,7 @@ export const StyledContent = styled(CardContent)`
         position: relative;
         width: 16px;
         height: 16px;
-        border-radius: 8px;
+        border-radius: 6px;
         border: 1px solid #2411cc;
         margin: 0 8px;
         transition: 100ms ease transform;
@@ -69,12 +68,12 @@ export const StyledContent = styled(CardContent)`
           content: "";
           display: block;
           position: absolute;
-          width: 6px;
-          height: 6px;
+          width: 8px;
+          height: 8px;
           left: 50%;
           top: 50%;
           transform: translateX(-50%) translateY(-50%);
-          border-radius: 4px;
+          border-radius: 3px;
         }
 
         &:nth-child(1){
@@ -92,9 +91,9 @@ export const StyledContent = styled(CardContent)`
         }
 
         &:nth-child(3){
-          border-color: ${transparentize(0.33, '#A495B9')};
+          border-color: ${transparentize(0.33, '#9268CC')};
           &::after {
-            background: #A495B9;
+            background: #9268CC;
           }
         }
 
@@ -125,3 +124,12 @@ export const StyledPrice = styled(Typography)`
   `}
 `;
 
+export const StyledFavoriteButton = styled(IconButton)`
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 100ms linear;
+  transition-delay: 200ms;
+`;

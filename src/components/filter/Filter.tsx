@@ -49,7 +49,7 @@ const Filter: React.FC<FilterPorps> = ({handler}) => {
   return (
     <StyledFilterList className="grid">
       <div className="inner">
-        <div className="s-4 ipad-12 col">
+        <div className="s-6 l-12 col">
           <FormControl variant="outlined">
             <InputLabel id="demo-simple-select-outlined-label">Gender</InputLabel>
             <Select
@@ -74,7 +74,7 @@ const Filter: React.FC<FilterPorps> = ({handler}) => {
           </FormControl>
         </div>
 
-        <div className="s-4 ipad-12 col">
+        <div className="s-6 l-12 col">
           <FormControl variant="outlined">
             <InputLabel id="demo-simple-select-outlined-label">Release Year</InputLabel>
             <Select
