@@ -21,7 +21,7 @@ export const getProducts = (specs: SneakerSpecs) =>
   axios
     .get(
       (`${apiPath}
-        ?limit=20
+        ?limit=12
         &brand=Nike
         &name=air+force+1
         &releaseYear=${specs.releaseYear}

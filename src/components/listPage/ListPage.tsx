@@ -16,6 +16,7 @@ import {
 
 const ListPage: React.FC = () => {
 
+  const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [productData, setProductData] = useState(Object);
 
@@ -37,6 +38,7 @@ const ListPage: React.FC = () => {
     } as api.SneakerSpecs).then( (data: any) => {
       if (data.error) {
         console.log("Error:", data.error)
+        setIsError(true)
       } else {
         setProductData(data.response.data)
       }
@@ -50,6 +52,7 @@ const ListPage: React.FC = () => {
   }, [])
   
   useEffect(() => {
+    setIsError(false)
     getProducts()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gender, releaseYear])
@@ -65,7 +68,7 @@ const ListPage: React.FC = () => {
           {isLoading ? (
             <StyledCircularProgress />
           ) : (        
-            productData ? (
+            (!isError && productData) ? (
               <>
                 <Box 
                   mb={1}
@@ -84,7 +87,13 @@ const ListPage: React.FC = () => {
                 <StyledProductList productData={productData.results} />
               </>
             ) : (
-              <span>There was an error answering the request.</span>
+              <Box 
+                display="flex"
+                justifyContent="center"
+                p={2}
+                >
+                <Typography variant="subtitle1">Uh-oh. Seems like something went wrong! 🤫</Typography>
+              </Box>
             )
           )}
         </main>
