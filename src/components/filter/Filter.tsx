@@ -47,47 +47,53 @@ const Filter: React.FC<FilterPorps> = ({handler}) => {
   }
 
   return (
-    <StyledFilterList>
-      <FormControl variant="outlined">
-        <InputLabel id="demo-simple-select-outlined-label">Gender</InputLabel>
-        <Select
-          labelId="demo-simple-select-outlined-label"
-          id="gender-select-outlined"
-          value={gender}
-          onChange={handleGenderChange}
-          label="Gender"
-          >
-          {genders.map((gender: any) => {
-            let key, val: string = ""
-            Object.keys(gender).forEach((g: any) => {
-              key = g
-              val = gender[g]
-            })
-            return <MenuItem 
-              key={key}
-              value={key}
-              >{val}</MenuItem>
-          })}
-        </Select>
-      </FormControl>
+    <StyledFilterList className="grid">
+      <div className="inner">
+        <div className="s-4 ipad-12 col">
+          <FormControl variant="outlined">
+            <InputLabel id="demo-simple-select-outlined-label">Gender</InputLabel>
+            <Select
+              labelId="demo-simple-select-outlined-label"
+              id="gender-select-outlined"
+              value={gender}
+              onChange={handleGenderChange}
+              label="Gender"
+              >
+              {genders.map((gender: any) => {
+                let key, val: string = ""
+                Object.keys(gender).forEach((g: any) => {
+                  key = g
+                  val = gender[g]
+                })
+                return <MenuItem 
+                  key={key}
+                  value={key}
+                  >{val}</MenuItem>
+              })}
+            </Select>
+          </FormControl>
+        </div>
 
-      <FormControl variant="outlined">
-        <InputLabel id="demo-simple-select-outlined-label">Release Year</InputLabel>
-        <Select
-          labelId="demo-simple-select-outlined-label"
-          id="release-year-select-outlined"
-          value={releaseYear}
-          onChange={handleReleaseYearChange}
-          label="Release Year"
-          >
-          {releaseYears.map((year: number) => {
-            return <MenuItem 
-              key={year}
-              value={year}
-              >{year}</MenuItem>
-          })}
-        </Select>
-      </FormControl>
+        <div className="s-4 ipad-12 col">
+          <FormControl variant="outlined">
+            <InputLabel id="demo-simple-select-outlined-label">Release Year</InputLabel>
+            <Select
+              labelId="demo-simple-select-outlined-label"
+              id="release-year-select-outlined"
+              value={releaseYear}
+              onChange={handleReleaseYearChange}
+              label="Release Year"
+              >
+              {releaseYears.map((year: number) => {
+                return <MenuItem 
+                  key={year}
+                  value={year}
+                  >{year}</MenuItem>
+              })}
+            </Select>
+          </FormControl>
+        </div>
+      </div>
     </StyledFilterList>
   );
 }

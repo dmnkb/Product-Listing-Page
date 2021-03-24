@@ -17,6 +17,7 @@ const ProductList: React.FC<ProductListProps> = ({productData}) => {
               <Card 
                 title={data.title}
                 image={data.media.imageUrl}
+                price={data.retailPrice}
                 />
               </div>
           )

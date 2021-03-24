@@ -5,9 +5,7 @@ import {
   CardActionArea,
   CardMedia,
   CardContent,
-  Typography,
-  CardActions,
-  Button
+  Typography  
 } from '@material-ui/core'
 
 export const StyledCard = styled(Card)`
@@ -15,7 +13,7 @@ export const StyledCard = styled(Card)`
 `;
 
 export const StyledCardActionArea = styled(CardActionArea)`
-  height: 400px;
+  
 `;
 
 export const StyledCardMedia = styled(CardMedia)`
@@ -31,13 +29,16 @@ export const StyledCardMediaMissing = styled(CardMedia)`
 `;
 
 export const StyledContent = styled(CardContent)`
-
+  h2 {
+    
+  }
 `;
 
-export const StyledCardActions = styled(CardActions)`
-
+export const StyledTitle = styled(Typography)`
+  
 `;
 
-export const StyledCardButton = styled(Button)`
-
+export const StyledPrice = styled(Typography)`
+  
 `;
+
