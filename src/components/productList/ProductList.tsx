@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Card from './card/Card'
+
 interface ProductListProps {
   readonly productData: any
 }
@@ -11,17 +13,12 @@ const ProductList: React.FC<ProductListProps> = ({productData}) => {
       <div className="inner">
         {productData.map( (data: any) => {
           return (
-            <div 
-              className="s-6 m-4 l-3 col" 
-              key={data.id}>
-              <img 
-                src={`${data.media.imageUrl}`} 
-                width="100%"
-                alt=""
+            <div className="s-12 ipad-6 l-4 col">
+              <Card 
+                title={data.title}
+                image={data.media.imageUrl}
                 />
-              <span>{data.title}</span><br/><br/>
-              <span>{data.colorway}</span>
-            </div>
+              </div>
           )
         })}
       </div>

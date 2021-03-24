@@ -12,7 +12,7 @@ export const StyledProductList = styled(ProductList)`
 
 export const StyledCircularProgress = styled(CircularProgress)`
   margin-left: calc( 50% - 24px );
-  margin-top: 24px;
+  margin-top: calc( 50vh - 48px );
 `;
 
 export const StyledFilterList = styled.div`
