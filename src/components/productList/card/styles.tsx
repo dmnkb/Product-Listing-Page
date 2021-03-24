@@ -20,6 +20,58 @@ export const StyledCard = styled(Card)`
     ul.colors { bottom: 24px; }
     .fav-button { opacity: 1; }
   }
+  ul.colors {
+    transition: 100ms linear bottom;
+    transition-delay: 200ms;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    bottom: -16px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    li {
+      display: block;
+      position: relative;
+      width: 16px;
+      height: 16px;
+      border-radius: 6px;
+      border: 1px solid;
+      margin: 0 8px;
+      transition: 100ms ease transform;
+      cursor: pointer;
+      &:hover {
+        transform: scale(1.5);
+      }
+      &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        left: 50%;
+        top: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        border-radius: 3px;
+      }
+      &.variant-1{
+        border-color: ${transparentize(0.33, '#F9D7C0')};
+        &::after { background: #F9D7C0; }
+      }
+      &.variant-2{
+        border-color: ${transparentize(0.33, '#E89E9E')};
+        &::after { background: #E89E9E; }
+      }
+      &.variant-3{
+        border-color: ${transparentize(0.33, '#9268CC')};
+        &::after { background: #9268CC; }
+      }
+      &.variant-4{
+        border-color: ${transparentize(0.33, '#2F288A')};
+        &::after { background: #2F288A; }
+      }
+    }
+  }
 `;
 
 export const StyledCardActionArea = styled(CardActionArea)`
@@ -37,77 +89,6 @@ export const StyledContent = styled(CardContent)`
     text-align: center;
     margin: ${theme.spacing(2, 4, 6, 4)};
     padding: 0;
-
-    ul.colors {
-
-      transition: 100ms linear bottom;
-      transition-delay: 200ms;
-      margin: 0;
-      padding: 0;
-      position: absolute;
-      bottom: -16px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-
-      li {
-        display: block;
-        position: relative;
-        width: 16px;
-        height: 16px;
-        border-radius: 6px;
-        border: 1px solid #2411cc;
-        margin: 0 8px;
-        transition: 100ms ease transform;
-
-        &:hover {
-          transform: scale(1.5);
-        }
-
-        &::after {
-          content: "";
-          display: block;
-          position: absolute;
-          width: 8px;
-          height: 8px;
-          left: 50%;
-          top: 50%;
-          transform: translateX(-50%) translateY(-50%);
-          border-radius: 3px;
-        }
-
-        &:nth-child(1){
-          border-color: ${transparentize(0.33, '#F9D7C0')};
-          &::after {
-            background: #F9D7C0;
-          }
-        }
-
-        &:nth-child(2){
-          border-color: ${transparentize(0.33, '#E89E9E')};
-          &::after {
-            background: #E89E9E;
-          }
-        }
-
-        &:nth-child(3){
-          border-color: ${transparentize(0.33, '#9268CC')};
-          &::after {
-            background: #9268CC;
-          }
-        }
-
-        &:nth-child(4){
-          border-color: ${transparentize(0.33, '#2F288A')};
-          &::after {
-            background: #2F288A;
-          }
-        }
-
-      }
-
-    }
-
   `}
 `;
 

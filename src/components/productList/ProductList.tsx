@@ -14,9 +14,11 @@ const ProductList: React.FC<ProductListProps> = ({productData}) => {
     <StyledProductList className="grid">
       <div className="inner">
         {productData.map( (data: any) => {
-          console.log(data)
           return (
-            <div className="s-12 ipad-6 xl-4 col">
+            <div 
+              className="s-12 ipad-6 xl-4 col"
+              key={data.id}
+              >
               <Card 
                 title={data.title}
                 image={data.media.thumbUrl}

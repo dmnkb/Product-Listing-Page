@@ -57,13 +57,13 @@ const theme = createMuiTheme({
       default: "#fff"
     },
     primary: {
-       main: '#E89E9E',
-       dark: '#3D3D48',
-       light: '#fff'
+      main: '#346A4E',
+      dark: '#3D3D48',
+      light: '#fff'
     },
-    // secondary: {
-    //    main: '#F1D0CA',
-    // },
+    secondary: {
+      main: '#F9D7C0',
+    },
     text: {
       primary: '#26262C',
       secondary: '#757575'
