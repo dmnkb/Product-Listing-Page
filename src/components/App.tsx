@@ -5,7 +5,7 @@ import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 
 import theme from '../theme/theme'
 
-import ListPage from './ListPage'
+import ListPage from './listPage/ListPage'
 
 function App() {
   return (

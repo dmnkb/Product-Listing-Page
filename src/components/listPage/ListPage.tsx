@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from 'react';
 
-import * as api from '../api/Api'
+import * as api from '../../api/Api'
 
-import ProductList from './ProductList'
-import Filter from './filter/Filter'
+import Filter from '../filter/Filter'
+
+import { 
+  StyledProductList,
+  StyledCircularProgress
+} from './styles'
 
 import {
-  CircularProgress
+  Typography
 } from '@material-ui/core'
 
 const ListPage: React.FC = () => {
 
   const [isLoading, setIsLoading] = useState(true);
-  const [productData, setProductData] = useState([]);
+  const [productData, setProductData] = useState(Object);
 
   const [gender, setGender] = React.useState('');
   const [releaseYear, setReleaseYear] = React.useState(2020);
@@ -33,8 +37,7 @@ const ListPage: React.FC = () => {
       if (data.error) {
         console.log("Error:", data.error)
       } else {
-        setProductData(data.response.data.results)
-        console.log(data)
+        setProductData(data.response.data)
       }
       setIsLoading(false)
     })
@@ -42,10 +45,12 @@ const ListPage: React.FC = () => {
   
   useEffect(() => {
     getProducts()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   
   useEffect(() => {
     getProducts()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gender, releaseYear])
 
 
@@ -57,10 +62,13 @@ const ListPage: React.FC = () => {
         </aside>
         <main className="s-12 m-6 l-9 col">
           {isLoading ? (
-            <CircularProgress />
+            <StyledCircularProgress />
           ) : (        
             productData ? (
-              <ProductList productData={productData} />
+              <>
+                <Typography variant="overline">{`${productData && productData.count} Products found`}</Typography>
+                <StyledProductList productData={productData.results} />
+              </>
             ) : (
               <span>There was an error answering the request.</span>
             )

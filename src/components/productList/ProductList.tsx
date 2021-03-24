@@ -1,10 +1,10 @@
 import React from 'react';
 
-interface ProductListPorps {
+interface ProductListProps {
   readonly productData: any
 }
 
-const ProductList: React.FC<ProductListPorps> = ({productData}) => {
+const ProductList: React.FC<ProductListProps> = ({productData}) => {
 
   return (
     <div className="grid">
@@ -19,7 +19,8 @@ const ProductList: React.FC<ProductListPorps> = ({productData}) => {
                 width="100%"
                 alt=""
                 />
-              <span>{data.title}</span>
+              <span>{data.title}</span><br/><br/>
+              <span>{data.colorway}</span>
             </div>
           )
         })}

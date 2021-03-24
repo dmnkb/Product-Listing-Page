@@ -13,7 +13,7 @@ export interface SneakerSpecs {
 }
 
 /**
- * ?brand=Nike&releaseYear=2021&name=air+force+1
+ * 
  * @param specs 
  * @returns AxiosResponse<any>
  */
