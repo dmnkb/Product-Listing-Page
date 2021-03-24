@@ -10,7 +10,8 @@ import {
 } from './styles'
 
 import {
-  Typography
+  Typography,
+  Box
 } from '@material-ui/core'
 
 const ListPage: React.FC = () => {
@@ -66,7 +67,20 @@ const ListPage: React.FC = () => {
           ) : (        
             productData ? (
               <>
-                <Typography variant="overline">{`${productData && productData.count} Products found`}</Typography>
+                <Box 
+                  mb={1}
+                  display="flex"
+                  justifyContent="space-between"
+                  alignItems="center"
+                  >
+                  <Typography 
+                    variant="overline"
+                    gutterBottom
+                    >
+                      {`Nike Air Force 1 (${productData && productData.count})`}
+                    </Typography>
+
+                </Box>
                 <StyledProductList productData={productData.results} />
               </>
             ) : (

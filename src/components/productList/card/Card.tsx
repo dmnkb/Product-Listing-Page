@@ -1,14 +1,9 @@
 import React from 'react';
 
-import {  
-  Typography
-} from '@material-ui/core'
-
 import {
   StyledCard,
   StyledCardActionArea,
   StyledCardMedia,
-  StyledCardMediaMissing,
   StyledContent,
   StyledTitle,
   StyledPrice
@@ -25,22 +20,24 @@ const Card: React.FC<CardProps> = ({title, image, price}) => {
   return (
     <StyledCard>
       <StyledCardActionArea>
-        {image ? 
-          <StyledCardMedia
-            image={image}
-            title={title}
-          /> : 
-          <StyledCardMediaMissing>
-            <span>No image found</span>
-          </StyledCardMediaMissing>
-        }
+        {/* Fake image for the sake of demonstration */}
+        <StyledCardMedia
+          image={image || "https://images.stockx.com/images/Nike-Air-Force-1-Low-Supreme-Box-Logo-White-Product.jpg?fit=fill&bg=FFFFFF&w=140&h=100&auto=format,compress&trim=color&q=90&dpr=2&updated_at=1606164536"}
+          title={title}
+        />
         <StyledContent>
-          <StyledTitle gutterBottom variant="h2">
+          <StyledTitle gutterBottom variant="h3">
             {title}
           </StyledTitle>
           <StyledPrice variant="subtitle1" color="textSecondary">
-            {price}
+            {price || 100},00€
           </StyledPrice>
+          <ul className="colors">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+          </ul>
         </StyledContent>
       </StyledCardActionArea>
     </StyledCard>

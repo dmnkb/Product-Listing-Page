@@ -5,8 +5,8 @@ import "./styles.scss"
 const theme = createMuiTheme({
   typography: {
     allVariants: {
-      // fontFamily: ['Work Sans', 'sans-serif'].join(","),
-      // color: '#212429'
+      fontFamily: ['Work Sans', 'sans-serif'].join(","),
+      color: '#26262C'
     },
     h1: {
       // fontSize: "48px",
@@ -21,10 +21,10 @@ const theme = createMuiTheme({
       // lineHeight: 1.1
     },
     h3: {
-      // fontSize: "36px",
-      // fontWeight: 400,
-      // letterSpacing: "calc(calc(0.01 * 1em) * -7)",
-      // lineHeight: 1.1
+       fontSize: "18px",
+       fontWeight: 400,
+       letterSpacing: "calc(calc(0.01 * 1em) * -4)",
+       lineHeight: 1.3
     },
     h4: {
       // fontSize: "20px",
@@ -53,21 +53,21 @@ const theme = createMuiTheme({
     }
   },
   palette: {
-    // background: {
-    //   default: "#f00"
-    // },
-    // primary: {
-    //    main: '#212429',
-    //    dark: '#212429',
-    //    light: '#fff'
-    // },
+    background: {
+      default: "#fff"
+    },
+    primary: {
+       main: '#F9D7C0',
+       dark: '#3D3D48',
+       light: '#fff'
+    },
     // secondary: {
     //    main: '#F1D0CA',
     // },
-    // text: {
-    //    primary: '#212429',
-    //    secondary: '#4A413F'
-    // }
+    text: {
+      primary: '#26262C',
+      secondary: '#757575'
+    }
   },
 });
 
