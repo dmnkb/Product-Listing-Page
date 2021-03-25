@@ -1,4 +1,5 @@
 import React from 'react';
+import MyContext from '../Context'
 
 import {
   IconButton  
@@ -19,52 +20,41 @@ interface ProductListHeaderProps {
 
 const ProductListHeader: React.FC<ProductListHeaderProps> = ({resultsCount}) => { 
 
-  /*const [sorting, setSorting] = React.useState('');
-
-  const handleSortingChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setSorting(event.target.value as string);
-  };*/
-
   return (
-    <StyledProductListHeader>
-      
-      <StyledHeadline variant="overline">
-        {`Nike Air Force 1 (${resultsCount && resultsCount})`}
-      </StyledHeadline>
-        
-        <StyledControls>
-          {/* <Typography variant="subtitle2">
-            Sort by:&nbsp;
-          </Typography>
-          <FormControl variant="outlined">
-            <InputLabel id="demo-simple-select-outlined-label">Sorting</InputLabel>
-            <Select
-              labelId="demo-simple-select-outlined-label"
-              id="demo-simple-select-outlined"
-              value={sorting}
-              onChange={handleSortingChange}
-              label="Sorting"
-            >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
-          </Select>
-        </FormControl> */}
-          <IconButton 
-            aria-label="favorite"
-            color="primary"
-            className="fav-button"
-            >
-            <StyledBadge badgeContent={4} color="secondary">
-              <HeartIcon />
-            </StyledBadge>
-          </IconButton>
-        </StyledControls>
+    <MyContext.Consumer>
+      {( context ) => {        
+        return (
+          <StyledProductListHeader>
+            
+            <StyledHeadline variant="overline">
+              {`Nike Air Force 1 (${resultsCount && resultsCount})`}
+            </StyledHeadline>
+              
+            <StyledControls>
+              {context.favs.length-1 ?
+                <IconButton 
+                  aria-label="favorite"
+                  color="primary"
+                  className="fav-button"
+                  >
+                  <StyledBadge badgeContent={context.favs.length-1} color="secondary">
+                    <HeartIcon /> 
+                  </StyledBadge> 
+                </IconButton> :
+                <IconButton 
+                  aria-label="favorite"
+                  color="primary"
+                  className="fav-button"
+                  >
+                  <HeartIcon /> 
+                </IconButton>
+                }
+            </StyledControls>
 
-      </StyledProductListHeader>
+          </StyledProductListHeader>
+        )
+      }}
+    </MyContext.Consumer>
   );
 }
 

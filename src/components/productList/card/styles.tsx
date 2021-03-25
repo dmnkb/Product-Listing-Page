@@ -110,7 +110,10 @@ export const StyledFavoriteButton = styled(IconButton)`
   top: 8px;
   right: 8px;
   z-index: 2;
-  opacity: 0;
   transition: opacity 100ms linear;
   transition-delay: 200ms;
+  opacity: 0;
+  &.faved {
+    opacity: 1;
+  }
 `;

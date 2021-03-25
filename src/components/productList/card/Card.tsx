@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import StoreContext from '../../Context'
 
 import HeartIconBorder from '@material-ui/icons/FavoriteBorder';
 import HeartIcon from '@material-ui/icons/Favorite';
@@ -14,12 +15,17 @@ import {
 } from './styles'
 
 interface CardProps {
+  readonly productID: string
   readonly title: string
   readonly image: string
   readonly price: string
 }
 
-const Card: React.FC<CardProps> = ({title, image, price}) => {
+const Card: React.FC<CardProps> = ({title, image, price, productID}) => {
+
+  const [id, setID] = React.useState("");
+  const [isFaved, setIsFaved] = React.useState(false);
+  useEffect(() => { setID(productID) }, [])
   
   /**
    * Simulate color varants. Steps:
@@ -41,45 +47,59 @@ const Card: React.FC<CardProps> = ({title, image, price}) => {
   let allColors = [1, 2, 3, 4]
   allColors = shuffle(allColors)
 
-  let colors = []
+  let colors: number[] = []
   for (let i = 0; i < Math.floor(Math.random() * 4) + 1 ; i++) {
     colors.push(allColors[i])
   }
   colors.sort()
 
   return (
-    <StyledCard>
-      <StyledFavoriteButton 
-        aria-label="favorite"
-        color="primary"
-        className="fav-button"
-        >
-        <HeartIconBorder />
-      </StyledFavoriteButton>
-      <StyledCardActionArea>
-        {/* Fake image for the sake of demonstration */}
-        <StyledCardMedia
-          image={image || "https://images.stockx.com/images/Nike-Air-Force-1-Low-Supreme-Box-Logo-White-Product.jpg?fit=fill&bg=FFFFFF&w=140&h=100&auto=format,compress&trim=color&q=90&dpr=2&updated_at=1606164536"}
-          title={title}
-        />
-        <StyledContent>
-          <StyledTitle gutterBottom variant="h3">
-            {title}
-          </StyledTitle>
-          <StyledPrice variant="subtitle1" color="textSecondary">
-            {price || 100},00€
-          </StyledPrice>
-        </StyledContent>
-      </StyledCardActionArea>
-      <ul className="colors">
-        {colors.map((i) => 
-          <li 
-            className={`variant-${i}`}
-            key={i}
-            ></li>
-        )}
-      </ul>
-    </StyledCard>
+    <StoreContext.Consumer>
+      {( context ) => {
+        console.log(context.favs)
+        return ( 
+          <StyledCard>
+            <StyledFavoriteButton
+              aria-label="favorite"
+              color="primary"
+              className={`fav-button ${(isFaved) && "faved"}`}
+              onClick={() => {
+                context.favClicked(id)
+                setIsFaved(context.favs.findIndex(x => x==id) !== -1)
+              }}
+              >
+                {(isFaved) ?
+                  <HeartIcon /> :
+                  <HeartIconBorder />
+                }
+            </StyledFavoriteButton>
+            <StyledCardActionArea>
+              {/* Id image is missing fake it for the sake of demonstration */}
+              <StyledCardMedia
+                image={image || "https://images.stockx.com/images/Nike-Air-Force-1-Low-Supreme-Box-Logo-White-Product.jpg?fit=fill&bg=FFFFFF&w=140&h=100&auto=format,compress&trim=color&q=90&dpr=2&updated_at=1606164536"}
+                title={title}
+              />
+              <StyledContent>
+                <StyledTitle gutterBottom variant="h3">
+                  {title}
+                </StyledTitle>
+                <StyledPrice variant="subtitle1" color="textSecondary">
+                  {price || 100},00€
+                </StyledPrice>
+              </StyledContent>
+            </StyledCardActionArea>
+            <ul className="colors">
+              {colors.map((i) => 
+                <li 
+                  className={`variant-${i}`}
+                  key={i}
+                  ></li>
+              )}
+            </ul>
+          </StyledCard>      
+        )
+      }}
+    </StoreContext.Consumer>
   );
 }
 

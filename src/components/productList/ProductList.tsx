@@ -23,12 +23,13 @@ const ProductList: React.FC<ProductListProps> = ({productData}) => {
                 title={data.title}
                 image={data.media.thumbUrl}
                 price={data.retailPrice}
+                productID={data.id}
                 />
-              </div>
+            </div>
           )
         })}
       </div>
-    </StyledProductList>
+    </StyledProductList> 
   );
 }
 

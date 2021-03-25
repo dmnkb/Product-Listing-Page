@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import StoreContext from '../Context'
 
 import * as api from '../../api/Api'
 
@@ -24,7 +25,17 @@ const ListPage: React.FC = () => {
   const [gender, setGender] = React.useState('');
   const [releaseYear, setReleaseYear] = React.useState(2020);
   
-  const [sorting, setSorting] = React.useState('');
+  const [favs, setFavs] = React.useState(['']);
+
+  const favClicked = (id: string) => {
+    let tempArray = favs
+    if ( tempArray.findIndex(x => x==id) !== -1 ) {
+      tempArray.splice(tempArray.indexOf(id))
+    } else {
+      tempArray.push(id)
+    }
+    setFavs(tempArray)
+  }
 
   const onFilterChanged = (gender: api.gender, releaseYear: number) => {
     setGender(gender)
@@ -51,45 +62,47 @@ const ListPage: React.FC = () => {
   
   useEffect(() => {
     getProducts()
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   
   useEffect(() => {
     setIsError(false)
     getProducts()
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gender, releaseYear])
 
-  
-
   return (
-    <main className="grid">
-      <div className="inner">
-        <aside className="s-12 l-3 col">
-          <Filter handler={onFilterChanged} />
-        </aside>
-        <main className="s-12 l-9 col">
-          {isLoading ? (
-            <StyledCircularProgress />
-          ) : (        
-            (!isError && productData) ? (
-              <>
-                <ProductListHeader resultsCount={productData.count}/>
-                <StyledProductList productData={productData.results} />
-              </>
-            ) : (
-              <Box 
-                display="flex"
-                justifyContent="center"
-                p={2}
-                >
-                <Typography variant="subtitle1">Uh-oh. Seems like something went wrong! 🤫</Typography>
-              </Box>
-            )
-          )}
-        </main>
-      </div>
-    </main>
+    <StoreContext.Provider value={{ favClicked, favs }}>
+      <main className="grid">
+        <div className="inner">
+          <aside className="s-12 l-3 col">
+            <Filter handler={onFilterChanged} />
+          </aside>
+          <main className="s-12 l-9 col">
+            {isLoading ? (
+              <StyledCircularProgress />
+            ) : (        
+              (!isError && productData) ? (
+                <>                
+                  <ProductListHeader resultsCount={productData.count} />
+                  <StyledProductList productData={productData.results} />
+                </>
+              ) : (
+                <Box 
+                  display="flex"
+                  justifyContent="center"
+                  p={2}
+                  >
+                  <Typography variant="subtitle1">Uh-oh. Seems like something went wrong! 🤫</Typography>
+                </Box>
+              )
+            )}
+          </main>
+        </div>
+      </main>
+    </StoreContext.Provider>
   );
 }
 
