@@ -36,7 +36,7 @@ const ProductListHeader: React.FC<ProductListHeaderProps> = ({resultsCount, favC
                   aria-label="favorite"
                   color="primary"
                   className="fav-button"
-                  onClick={ () => context.handleComparisonClick() }
+                  onClick={ () => context.handleComparisonOpen() }
                   >
                   <StyledBadge badgeContent={favCount} color="secondary">
                     <HeartIcon /> 
@@ -46,7 +46,7 @@ const ProductListHeader: React.FC<ProductListHeaderProps> = ({resultsCount, favC
                   aria-label="favorite"
                   color="primary"
                   className="fav-button"
-                  onClick={ () => context.handleComparisonClick() }
+                  onClick={ () => context.handleComparisonOpen() }
                   >
                   <HeartIcon /> 
                 </IconButton>

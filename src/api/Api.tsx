@@ -45,8 +45,8 @@ export const getProductsOffline = () =>
  * @param productID 
  * @returns AxiosResponse<any>
  */
-export const getProductById = (productID: string) =>
+export const getProductById = (productID: string) => 
   axios
-    .get(`${apiPath}/${productID}`)
+    .get(`${apiPath}/${productID}?limit=12`)
     .then((response) => ({response, error: undefined}))
-    .catch((error) => ({response: undefined, error}));
+    .catch((error) => ({response: undefined, error})); 

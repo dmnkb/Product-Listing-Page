@@ -9,11 +9,11 @@ import {
 
 import { StyledFilterList } from './styles'
 
-interface FilterPorps {
+interface FilterProps {
   readonly handler: Function
 }
 
-const Filter: React.FC<FilterPorps> = ({handler}) => {
+const Filter: React.FC<FilterProps> = ({handler}) => {
 
   const [gender, setGender] = React.useState('');
   const [releaseYear, setReleaseYear] = React.useState(2020);

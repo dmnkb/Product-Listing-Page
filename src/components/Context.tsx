@@ -3,7 +3,9 @@ import React from 'react';
 const StoreContext = React.createContext({
   favs: [''],
   favClicked: (id: string) => {},
-  handleComparisonClick: () => {}
+  comparisonOpen: false,
+  handleComparisonOpen: () => {},
+  handleComparisonClose: () => {}
 });
 
 export default StoreContext

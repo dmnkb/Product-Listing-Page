@@ -6,15 +6,11 @@ import * as api from '../../api/Api'
 import {
   Typography,
   Box,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  IconButton,
 } from '@material-ui/core'
-
 
 import Filter from '../filter/Filter'
 import ProductListHeader from '../productListHeader/ProductListHeader'
+import ComparisonOverlay from '../comparison/Comparison'
 
 import { 
   StyledProductList,
@@ -23,33 +19,19 @@ import {
 
 const ListPage: React.FC = () => {
 
+  // general states
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [productData, setProductData] = useState(Object);
 
+  // filtering
   const [gender, setGender] = React.useState('');
   const [releaseYear, setReleaseYear] = React.useState(2020);
   
+  // context
   const [favs, setFavs] = React.useState(['']);
   const [favCount, setFavCount] = React.useState(0);
   const [comparisonOpen, setComparisonOpen] = React.useState(false);
-
-  const favClicked = (id: string) => {
-    let tempFavs = favs
-    if ( tempFavs.findIndex(x => x===id) !== -1 ) {
-      tempFavs.splice(tempFavs.indexOf(id), 1)
-    } else {
-      tempFavs.push(id)
-    }    
-    setFavs(tempFavs)
-    setFavCount(tempFavs.length)
-  }
-
-  const onFilterChanged = (gender: api.gender, releaseYear: number) => {
-    setGender(gender)
-    setReleaseYear(releaseYear)
-    setIsLoading(true)
-  }
 
   const getProducts = () => {
     api.getProducts({
@@ -70,27 +52,48 @@ const ListPage: React.FC = () => {
   
   useEffect(() => {
     getProducts()
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   
   useEffect(() => {
     setIsError(false)
     getProducts()
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gender, releaseYear])
 
-  const handleComparisonClick = () => {
+  const onFilterChanged = (gender: api.gender, releaseYear: number) => {
+    setGender(gender)
+    setReleaseYear(releaseYear)
+    setIsLoading(true)
+  }
+
+  const favClicked = (id: string) => {
+    let tempFavs = favs
+    if ( tempFavs.findIndex(x => x===id) !== -1 ) {
+      tempFavs.splice(tempFavs.indexOf(id), 1)
+    } else {
+      tempFavs.push(id)
+    }    
+    setFavs(tempFavs)
+    setFavCount(tempFavs.length)
+  }
+
+  const handleComparisonOpen = () => {
     setComparisonOpen(true);
   };
 
-  const handleClose = () => {
+  const handleComparisonClose = () => {
     setComparisonOpen(false);
   };
 
   return (
-    <StoreContext.Provider value={{ favs, favClicked, handleComparisonClick }}>
+    <StoreContext.Provider value={{ 
+      favs, 
+      favClicked,
+      comparisonOpen,
+      handleComparisonOpen,
+      handleComparisonClose 
+      }}>
       
       <main className="grid">
         <div className="inner">
@@ -120,19 +123,10 @@ const ListPage: React.FC = () => {
         </div>
       </main>
 
-      <Dialog 
-        open={comparisonOpen}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        >
-        <DialogTitle id="alert-dialog-title">
-          {"Use Google's location service?"}
-        </DialogTitle>
-
-        <DialogContent dividers>
-          Stuff goes here
-        </DialogContent>       
-      </Dialog>
+      <ComparisonOverlay 
+        favs={favs}
+        comparisonOpen={comparisonOpen}
+        />
 
     </StoreContext.Provider>
   );
