@@ -15,7 +15,7 @@ interface FilterProps {
 
 const Filter: React.FC<FilterProps> = ({handler}) => {
 
-  const [gender, setGender] = React.useState('');
+  const [gender, setGender] = React.useState('all');
   const [releaseYear, setReleaseYear] = React.useState(2020);
 
   const handleGenderChange = (event: React.ChangeEvent<{ value: unknown }>) => {
@@ -29,7 +29,7 @@ const Filter: React.FC<FilterProps> = ({handler}) => {
   };
   
   const genders = [
-    {'': 'All'},
+    {'all': 'All'},
     {'men': 'Men'},
     {'women': 'Women'},
     {'child': 'Child'},

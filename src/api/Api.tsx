@@ -3,7 +3,7 @@ import axios from "axios";
 const apiPath = "https://api.thesneakerdatabase.com/v1/sneakers";
 const apiOffline = "/newReleases.json";
 
-export type gender = 'men' | 'women' | 'child' | 'infant' | 'preschool' | 'toddler' | 'unisex' | 'youth'
+export type gender = 'all' | 'men' | 'women' | 'child' | 'infant' | 'preschool' | 'toddler' | 'unisex' | 'youth'
 
 export interface SneakerSpecs {
   gender: gender
@@ -17,18 +17,20 @@ export interface SneakerSpecs {
  * @param specs 
  * @returns AxiosResponse<any>
  */
-export const getProducts = (specs: SneakerSpecs) =>
-  axios
+export const getProducts = (specs: SneakerSpecs) => {
+  let gender = (specs.gender === 'all') ? "" : "&gender=" + specs.gender
+  return axios
     .get(
       (`${apiPath}
         ?limit=12
         &brand=Nike
         &name=air+force+1
         &releaseYear=${specs.releaseYear}
-        ${specs.gender && ("&gender=" + specs.gender)}
+        ${gender}
         &page=${specs.page}`).replace(/\s/g, '')
     ).then((response) => ({response, error: undefined}))
     .catch((error) => ({response: undefined, error}));
+}
 
 /**
  * Fallback method in case of API issues

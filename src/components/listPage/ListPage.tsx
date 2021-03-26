@@ -25,7 +25,7 @@ const ListPage: React.FC = () => {
   const [productData, setProductData] = useState(Object);
 
   // filtering
-  const [gender, setGender] = React.useState('');
+  const [gender, setGender] = React.useState('all');
   const [releaseYear, setReleaseYear] = React.useState(2020);
   
   // context
