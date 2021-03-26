@@ -1,8 +1,8 @@
-import { createMuiTheme } from '@material-ui/core/styles';
+import { unstable_createMuiStrictModeTheme } from '@material-ui/core/styles';
 
 import "./styles.scss"
 
-const theme = createMuiTheme({
+const theme = unstable_createMuiStrictModeTheme({
   typography: {
     allVariants: {
       fontFamily: ['Sora', 'Work Sans', 'sans-serif'].join(","),

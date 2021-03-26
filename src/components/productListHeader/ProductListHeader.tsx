@@ -31,7 +31,7 @@ const ProductListHeader: React.FC<ProductListHeaderProps> = ({resultsCount, favC
               {`Nike Air Force 1 (${resultsCount && resultsCount})`}
             </StyledHeadline>              
             <StyledControls>
-              {context.favs.length-1 ?
+              {context.favs.length ?
                 <IconButton 
                   aria-label="favorite"
                   color="primary"

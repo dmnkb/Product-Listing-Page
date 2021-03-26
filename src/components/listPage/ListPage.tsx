@@ -51,6 +51,7 @@ const ListPage: React.FC = () => {
   }
   
   useEffect(() => {
+    favs.splice(0, 1)
     getProducts()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -106,7 +107,7 @@ const ListPage: React.FC = () => {
             ) : (        
               (!isError && productData) ? (
                 <>                
-                  <ProductListHeader resultsCount={productData.count} favCount={favCount-1} />
+                  <ProductListHeader resultsCount={productData.count} favCount={favCount} />
                   <StyledProductList productData={productData.results} />
                 </>
               ) : (
@@ -125,6 +126,7 @@ const ListPage: React.FC = () => {
 
       <ComparisonOverlay 
         favs={favs}
+        favCount={favCount}
         comparisonOpen={comparisonOpen}
         />
 

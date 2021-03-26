@@ -40,9 +40,7 @@ export const StyledCard = styled(Card)`
       margin: 0 8px;
       transition: 100ms ease transform;
       cursor: pointer;
-      &:hover {
-        transform: scale(1.5);
-      }
+      &:hover { transform: scale(1.5); }
       &::after {
         content: "";
         display: block;

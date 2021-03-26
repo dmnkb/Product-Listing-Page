@@ -85,8 +85,8 @@ const Card: React.FC<CardProps> = ({title, image, price, productID}) => {
             <ul className="colors">
               {colors.map((i) => 
                 <li 
-                  className={`variant-${i}`}
                   key={i}
+                  className={`variant-${i}`}
                   ></li>
               )}
             </ul>
