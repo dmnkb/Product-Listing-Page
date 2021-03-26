@@ -28,14 +28,15 @@ const ListPage: React.FC = () => {
   const [favs, setFavs] = React.useState(['']);
   const [favCount, setFavCount] = React.useState(0);
 
-  const favClicked = (favs: string[], id: string) => {
-    if ( favs.findIndex(x => x===id) !== -1 ) {
-      favs.splice(favs.indexOf(id))
+  const favClicked = (id: string) => {
+    let tempFavs = favs
+    if ( tempFavs.findIndex(x => x===id) !== -1 ) {
+      tempFavs.splice(tempFavs.indexOf(id), 1)
     } else {
-      favs.push(id)
-    }
-    setFavs(favs)
-    setFavCount(favs.length)
+      tempFavs.push(id)
+    }    
+    setFavs(tempFavs)
+    setFavCount(tempFavs.length)
   }
 
   const onFilterChanged = (gender: api.gender, releaseYear: number) => {
@@ -75,7 +76,7 @@ const ListPage: React.FC = () => {
   }, [gender, releaseYear])
 
   return (
-    <StoreContext.Provider value={{ favClicked, favs }}>
+    <StoreContext.Provider value={{ favs, favClicked }}>
       <main className="grid">
         <div className="inner">
           <aside className="s-12 l-3 col">

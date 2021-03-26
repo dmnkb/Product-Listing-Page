@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import StoreContext from '../../Context'
 
 import HeartIconBorder from '@material-ui/icons/FavoriteBorder';
@@ -22,10 +22,6 @@ interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({title, image, price, productID}) => {
-
-  const [id, setID] = React.useState("");
-  const [isFaved, setIsFaved] = React.useState(false);
-  useEffect(() => { setID(productID) }, [])
   
   /**
    * Simulate color varants. Steps:
@@ -61,13 +57,12 @@ const Card: React.FC<CardProps> = ({title, image, price, productID}) => {
             <StyledFavoriteButton
               aria-label="favorite"
               color="primary"
-              className={`fav-button ${(isFaved) && "faved"}`}
+              className={`fav-button ${(context.favs.findIndex(x => x===productID) !== -1) && "faved"}`}
               onClick={() => {
-                context.favClicked(context.favs, id)
-                setIsFaved(context.favs.findIndex(x => x===id) !== -1)
+                context.favClicked(productID)
               }}
               >
-                {(isFaved) ?
+                {(context.favs.findIndex(x => x===productID) !== -1) ?
                   <HeartIcon /> :
                   <HeartIconBorder />
                 }

@@ -4,7 +4,6 @@ import {
   Typography,
   Badge
 } from '@material-ui/core'
-import { rgba } from 'polished';
 
 export const StyledProductListHeader = styled.header`
   ${({theme}) => css`
