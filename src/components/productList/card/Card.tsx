@@ -74,10 +74,10 @@ const Card: React.FC<CardProps> = ({title, image, price, productID}) => {
                 title={title}
               />
               <StyledContent>
-                <StyledTitle gutterBottom variant="h3">
+                <StyledTitle gutterBottom variant="h3" data-test-title>
                   {title}
                 </StyledTitle>
-                <StyledPrice variant="subtitle1" color="textSecondary">
+                <StyledPrice variant="subtitle1" color="textSecondary" data-test-price>
                   {price || 100},00€
                 </StyledPrice>
               </StyledContent>

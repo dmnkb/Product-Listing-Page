@@ -5,8 +5,13 @@ import * as api from '../../api/Api'
 
 import {
   Typography,
-  Box
+  Box,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  IconButton,
 } from '@material-ui/core'
+
 
 import Filter from '../filter/Filter'
 import ProductListHeader from '../productListHeader/ProductListHeader'
@@ -27,6 +32,7 @@ const ListPage: React.FC = () => {
   
   const [favs, setFavs] = React.useState(['']);
   const [favCount, setFavCount] = React.useState(0);
+  const [comparisonOpen, setComparisonOpen] = React.useState(false);
 
   const favClicked = (id: string) => {
     let tempFavs = favs
@@ -75,8 +81,17 @@ const ListPage: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gender, releaseYear])
 
+  const handleComparisonClick = () => {
+    setComparisonOpen(true);
+  };
+
+  const handleClose = () => {
+    setComparisonOpen(false);
+  };
+
   return (
-    <StoreContext.Provider value={{ favs, favClicked }}>
+    <StoreContext.Provider value={{ favs, favClicked, handleComparisonClick }}>
+      
       <main className="grid">
         <div className="inner">
           <aside className="s-12 l-3 col">
@@ -104,6 +119,21 @@ const ListPage: React.FC = () => {
           </main>
         </div>
       </main>
+
+      <Dialog 
+        open={comparisonOpen}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        >
+        <DialogTitle id="alert-dialog-title">
+          {"Use Google's location service?"}
+        </DialogTitle>
+
+        <DialogContent dividers>
+          Stuff goes here
+        </DialogContent>       
+      </Dialog>
+
     </StoreContext.Provider>
   );
 }

@@ -25,18 +25,18 @@ const ProductListHeader: React.FC<ProductListHeaderProps> = ({resultsCount, favC
     <MyContext.Consumer>
       {( context ) => {        
         return (
-          <StyledProductListHeader>
-            
+
+          <StyledProductListHeader>           
             <StyledHeadline variant="overline">
               {`Nike Air Force 1 (${resultsCount && resultsCount})`}
-            </StyledHeadline>
-              
+            </StyledHeadline>              
             <StyledControls>
               {context.favs.length-1 ?
                 <IconButton 
                   aria-label="favorite"
                   color="primary"
                   className="fav-button"
+                  onClick={ () => context.handleComparisonClick() }
                   >
                   <StyledBadge badgeContent={favCount} color="secondary">
                     <HeartIcon /> 
@@ -46,13 +46,14 @@ const ProductListHeader: React.FC<ProductListHeaderProps> = ({resultsCount, favC
                   aria-label="favorite"
                   color="primary"
                   className="fav-button"
+                  onClick={ () => context.handleComparisonClick() }
                   >
                   <HeartIcon /> 
                 </IconButton>
                 }
             </StyledControls>
-
           </StyledProductListHeader>
+
         )
       }}
     </MyContext.Consumer>
