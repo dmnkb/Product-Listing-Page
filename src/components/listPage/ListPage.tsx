@@ -11,6 +11,7 @@ import {
 import Filter from '../filter/Filter'
 import ProductListHeader from '../productListHeader/ProductListHeader'
 import ComparisonOverlay from '../comparison/Comparison'
+import Header from '../header/Header'
 
 import { 
   StyledProductList,
@@ -51,7 +52,9 @@ const ListPage: React.FC = () => {
   }
   
   useEffect(() => {
+    let arr = favs
     favs.splice(0, 1)
+    setFavs(arr)
     getProducts()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -95,6 +98,8 @@ const ListPage: React.FC = () => {
       handleComparisonOpen,
       handleComparisonClose 
       }}>
+
+      <Header title="The 👟 Shop" />
       
       <main className="grid">
         <div className="inner">

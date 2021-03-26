@@ -1,17 +1,8 @@
 import React from 'react';
-import MyContext from '../Context'
-
-import {
-  IconButton  
-} from '@material-ui/core'
-
-import HeartIcon from '@material-ui/icons/Favorite';
 
 import {
   StyledProductListHeader,
-  StyledHeadline,
-  StyledControls,
-  StyledBadge
+  StyledHeadline
 } from './styles'
 
 interface ProductListHeaderProps {
@@ -22,41 +13,11 @@ interface ProductListHeaderProps {
 const ProductListHeader: React.FC<ProductListHeaderProps> = ({resultsCount, favCount}) => { 
 
   return (
-    <MyContext.Consumer>
-      {( context ) => {        
-        return (
-
-          <StyledProductListHeader>           
-            <StyledHeadline variant="overline">
-              {`Nike Air Force 1 (${resultsCount && resultsCount})`}
-            </StyledHeadline>              
-            <StyledControls>
-              {context.favs.length ?
-                <IconButton 
-                  aria-label="favorite"
-                  color="primary"
-                  className="fav-button"
-                  onClick={ () => context.handleComparisonOpen() }
-                  >
-                  <StyledBadge badgeContent={favCount} color="secondary">
-                    <HeartIcon /> 
-                  </StyledBadge> 
-                </IconButton> :
-                <IconButton 
-                  aria-label="favorite"
-                  color="primary"
-                  className="fav-button"
-                  onClick={ () => context.handleComparisonOpen() }
-                  >
-                  <HeartIcon /> 
-                </IconButton>
-                }
-            </StyledControls>
-          </StyledProductListHeader>
-
-        )
-      }}
-    </MyContext.Consumer>
+    <StyledProductListHeader>           
+      <StyledHeadline variant="overline">
+        {`Nike Air Force 1 (${resultsCount && resultsCount})`}
+      </StyledHeadline>            
+    </StyledProductListHeader>
   );
 }
 

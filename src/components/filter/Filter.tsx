@@ -47,7 +47,7 @@ const Filter: React.FC<FilterProps> = ({handler}) => {
   }
 
   return (
-    <StyledFilterList className="grid">
+    <StyledFilterList className="grid s-position-relative ipad-position-static">
       <div className="inner">
         <div className="s-6 l-12 col">
           <FormControl variant="outlined">

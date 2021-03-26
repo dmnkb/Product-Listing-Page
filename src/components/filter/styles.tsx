@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 
 export const StyledFilterList = styled.div`
   ${({ theme }) => css`
+    top: ${theme.spacing(16)}px;
     .inner {
       // Space here is too limited for standard 24px gutter
       grid-gap: 0;
@@ -12,6 +13,6 @@ export const StyledFilterList = styled.div`
       & > * {
         width: 100%;
       }
-    }
+    }    
   `}
 `;

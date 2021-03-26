@@ -4,16 +4,7 @@
 @import "~include-media/dist/_include-media.scss";
 @import "@material/layout-grid/mdc-layout-grid";
 
-/**
- * Note: This should be replaced by Styled-Components /
- * JS style class generation. SCSS mixins and variables 
- * are not accessable for Styled-Components.
- * 
- * For the time being this is ok.
- */
-
 :root {	
-	// should be responsive. Could be done using JS in future.
 	--dwn-gutter: 24px;
 	// map dwn-gutter to material gutter
 	--mdc-layout-grid-gutter-desktop: var(--dwn-gutter);
@@ -168,6 +159,21 @@ html {
 	@include media(">#{map.get($breakpoints, $breakpoint, "size")}") {
 		.show-up-#{map.get($breakpoints, $breakpoint, "class")} {
 			display: block;
+		}
+	}
+}
+
+/**
+ * display utility classes
+ */
+
+@each $breakpoint in map.keys($breakpoints) {
+	@include media(">#{map.get($breakpoints, $breakpoint, "size")}") {
+		.#{map.get($breakpoints, $breakpoint, "class")}-position-sticky {
+			position: sticky;
+		}		
+		.#{map.get($breakpoints, $breakpoint, "class")}-position-static {
+			position: static;
 		}
 	}
 }
