@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import MyContext from '../Context'
 
 import {
@@ -16,9 +16,10 @@ import {
 
 interface ProductListHeaderProps {
   readonly resultsCount: number
+  readonly favCount: number
 }
 
-const ProductListHeader: React.FC<ProductListHeaderProps> = ({resultsCount}) => { 
+const ProductListHeader: React.FC<ProductListHeaderProps> = ({resultsCount, favCount}) => { 
 
   return (
     <MyContext.Consumer>
@@ -37,7 +38,7 @@ const ProductListHeader: React.FC<ProductListHeaderProps> = ({resultsCount}) => 
                   color="primary"
                   className="fav-button"
                   >
-                  <StyledBadge badgeContent={context.favs.length-1} color="secondary">
+                  <StyledBadge badgeContent={favCount} color="secondary">
                     <HeartIcon /> 
                   </StyledBadge> 
                 </IconButton> :

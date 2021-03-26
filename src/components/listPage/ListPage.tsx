@@ -26,15 +26,16 @@ const ListPage: React.FC = () => {
   const [releaseYear, setReleaseYear] = React.useState(2020);
   
   const [favs, setFavs] = React.useState(['']);
+  const [favCount, setFavCount] = React.useState(0);
 
-  const favClicked = (id: string) => {
-    let tempArray = favs
-    if ( tempArray.findIndex(x => x==id) !== -1 ) {
-      tempArray.splice(tempArray.indexOf(id))
+  const favClicked = (favs: string[], id: string) => {
+    if ( favs.findIndex(x => x===id) !== -1 ) {
+      favs.splice(favs.indexOf(id))
     } else {
-      tempArray.push(id)
+      favs.push(id)
     }
-    setFavs(tempArray)
+    setFavs(favs)
+    setFavCount(favs.length)
   }
 
   const onFilterChanged = (gender: api.gender, releaseYear: number) => {
@@ -86,7 +87,7 @@ const ListPage: React.FC = () => {
             ) : (        
               (!isError && productData) ? (
                 <>                
-                  <ProductListHeader resultsCount={productData.count} />
+                  <ProductListHeader resultsCount={productData.count} favCount={favCount-1} />
                   <StyledProductList productData={productData.results} />
                 </>
               ) : (

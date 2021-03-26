@@ -56,7 +56,6 @@ const Card: React.FC<CardProps> = ({title, image, price, productID}) => {
   return (
     <StoreContext.Consumer>
       {( context ) => {
-        console.log(context.favs)
         return ( 
           <StyledCard>
             <StyledFavoriteButton
@@ -64,8 +63,8 @@ const Card: React.FC<CardProps> = ({title, image, price, productID}) => {
               color="primary"
               className={`fav-button ${(isFaved) && "faved"}`}
               onClick={() => {
-                context.favClicked(id)
-                setIsFaved(context.favs.findIndex(x => x==id) !== -1)
+                context.favClicked(context.favs, id)
+                setIsFaved(context.favs.findIndex(x => x===id) !== -1)
               }}
               >
                 {(isFaved) ?
