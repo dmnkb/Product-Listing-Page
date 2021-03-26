@@ -5,10 +5,10 @@
 - [x] responsiveness
 - [x] hover functionality on a product providing additional information like color variations etc.
 - [x] a simple filter functionality (e.g. after brand, color and size)
-- [ ] a product comparison overlay
+- [x] a product comparison overlay
 - [x] make use of a frameworks like reactJS, svelteJS …
 - [x] you can use design components like Material UI, react Bootstrap …
-- [ ] at least 1 unit test
+- [x] at least 1 unit test
 - [x] readme
 
 ---
