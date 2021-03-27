@@ -1,15 +1,43 @@
 # Product Listing Page
  
-### Requirements:
+## Requirements
 
-- [x] responsiveness
-- [x] hover functionality on a product providing additional information like color variations etc.
-- [x] a simple filter functionality (e.g. after brand, color and size)
-- [x] a product comparison overlay
-- [x] make use of a frameworks like reactJS, svelteJS …
-- [x] you can use design components like Material UI, react Bootstrap …
-- [x] at least 1 unit test
-- [x] readme
+- responsiveness
+- hover functionality on a product providing additional information like color variations etc.
+- a simple filter functionality (e.g. after brand, color and size)
+- a product comparison overlay
+- make use of a frameworks like reactJS, svelteJS …
+- you can use design components like Material UI, react Bootstrap …
+- at least 1 unit test
+- readme
+
+---
+
+## Stack
+
+#### Framework
+- [React](https://reactjs.org/) via [Create React App](https://github.com/facebook/create-react-app)
+- [Typescript](https://www.typescriptlang.org/)
+- [Axios](https://www.npmjs.com/package/axios)
+
+#### Design System / Styling
+- [Matierla UI](https://material-ui.com/)
+- [styled components](https://styled-components.com/)
+- [polished](https://polished.js.org/docs/)
+- [Sass / SCSS](https://sass-lang.com/)
+
+#### Grid
+Material UI comes with it's own grid. However, in order to increase flexibility and to be more concrete in terms of breakpoints, I generate breakpoint classes generically that fit my needs. I published the grid and explained further details and motivation [here](https://www.npmjs.com/package/dasweltbestegrid).
+- [normalize.css](https://necolas.github.io/normalize.css/)
+- [mdc-layout-grid](https://github.com/material-components/material-components-web/tree/master/packages/mdc-layout-grid)
+- [include-media](https://github.com/eduardoboucas/include-media)
+
+---
+
+## API
+
+With kind consent of [TG4 Solutions](https://tg4.solutions/) this project consumes their [sneaker database API](https://thesneakerdatabase.com/api).
+The app is preconfigured to search specifically for Nike Airforce 1 sneakers. The app leverages the API features of filtering by gender and release year. One thing to note here is that unfortunately it doesn't come with color variants. Therefore I decided to fake those by generating random ones.
 
 ---
 
