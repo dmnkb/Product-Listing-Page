@@ -26,7 +26,7 @@ export const StyledToolbar = styled(Toolbar)`
 
 export const StyledLogo = styled(Typography)`
   ${({theme}) => css`
-    
+    cursor: pointer;
   `}
 `;
 

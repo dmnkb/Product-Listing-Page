@@ -5,7 +5,11 @@ const StoreContext = React.createContext({
   favClicked: (id: string) => {},
   comparisonOpen: false,
   handleComparisonOpen: () => {},
-  handleComparisonClose: () => {}
+  handleComparisonClose: () => {},
+  gender: 'all',
+  releaseYear: 2020,
+  handleGenderChange: (event: React.ChangeEvent<{ value: unknown }>) => {},
+  handleReleaseYearChange: (event: React.ChangeEvent<{ value: unknown }>) => {}
 });
 
 export default StoreContext

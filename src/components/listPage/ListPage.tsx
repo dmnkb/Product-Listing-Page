@@ -15,7 +15,8 @@ import Header from '../header/Header'
 
 import { 
   StyledProductList,
-  StyledCircularProgress
+  StyledCircularProgress,
+  StyledPagination
 } from './styles'
 
 const ListPage: React.FC = () => {
@@ -24,6 +25,7 @@ const ListPage: React.FC = () => {
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [productData, setProductData] = useState(Object);
+  const [page, setPage] = React.useState(2);
 
   // filtering
   const [gender, setGender] = React.useState('all');
@@ -34,12 +36,29 @@ const ListPage: React.FC = () => {
   const [favCount, setFavCount] = React.useState(0);
   const [comparisonOpen, setComparisonOpen] = React.useState(false);
 
-  const getProducts = () => {
+  const handleLogoClicked = () => {
+    setGender('all')
+    setReleaseYear(2020)
+    setPage(1)    
+    getProducts('all', 2020)
+  }
+
+  const handleChangePage = (event: React.ChangeEvent<unknown>, newPage: number) => {
+    setPage(newPage)
+    getProducts(gender as api.gender, releaseYear, newPage)
+  };
+
+  const getProducts = (
+    gender: api.gender,
+    releaseYear: number,
+    page: number = 1
+    ) => {
+    setIsLoading(true)
     api.getProducts({
       gender: gender as api.gender,
       sort: '',
       releaseYear: releaseYear,
-      page: 1
+      page: page
     } as api.SneakerSpecs).then( (data: any) => {
       if (data.error) {
         console.log("Error:", data.error)
@@ -55,21 +74,26 @@ const ListPage: React.FC = () => {
     let arr = favs
     favs.splice(0, 1)
     setFavs(arr)
-    getProducts()
+    getProducts(gender as api.gender, releaseYear)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   
   useEffect(() => {
     setIsError(false)
-    getProducts()
+    setPage(1)
+    getProducts(gender as api.gender, releaseYear)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gender, releaseYear])
 
-  const onFilterChanged = (gender: api.gender, releaseYear: number) => {
-    setGender(gender)
-    setReleaseYear(releaseYear)
+  const handleGenderChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    setGender(event.target.value as string);
     setIsLoading(true)
-  }
+  };
+
+  const handleReleaseYearChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    setReleaseYear(event.target.value as number);
+    setIsLoading(true)
+  };
 
   const favClicked = (id: string) => {
     let tempFavs = favs
@@ -96,15 +120,22 @@ const ListPage: React.FC = () => {
       favClicked,
       comparisonOpen,
       handleComparisonOpen,
-      handleComparisonClose 
+      handleComparisonClose,
+      gender,
+      releaseYear,
+      handleGenderChange,
+      handleReleaseYearChange
       }}>
 
-      <Header title="The 👟 Shop" />
+      <Header 
+        title="The 👟 Shop" 
+        handleLogoClicked={handleLogoClicked}
+        />
       
       <main className="grid">
         <div className="inner">
           <aside className="s-12 l-3 col">
-            <Filter handler={onFilterChanged} />
+            <Filter />
           </aside>
           <main className="s-12 l-9 col">
             {isLoading ? (
@@ -114,6 +145,18 @@ const ListPage: React.FC = () => {
                 <>                
                   <ProductListHeader resultsCount={productData.count} favCount={favCount} />
                   <StyledProductList productData={productData.results} />
+                  <Box
+                    display="flex"
+                    justifyContent="center"
+                    my={6}
+                    >
+                    <StyledPagination 
+                      count={Math.floor(productData.count / 12)} 
+                      color="primary"                         
+                      page={page}
+                      onChange={handleChangePage}
+                      />
+                  </Box>
                 </>
               ) : (
                 <Box 

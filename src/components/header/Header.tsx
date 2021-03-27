@@ -16,9 +16,10 @@ import {
 
 interface HeaderPros {
   readonly title: string
+  readonly handleLogoClicked: Function
 }
 
-const Header: React.FC<HeaderPros> = ({title}) => { 
+const Header: React.FC<HeaderPros> = ({title, handleLogoClicked}) => { 
 
   return (
     <StoreContext.Consumer>
@@ -31,7 +32,10 @@ const Header: React.FC<HeaderPros> = ({title}) => {
                 <div className="inner">
                   <div className="s-12 col">
                     
-                    <StyledLogo variant="h6" >{title}</StyledLogo>
+                    <StyledLogo 
+                      variant="h6"
+                      onClick={() => handleLogoClicked()}
+                      >{title}</StyledLogo>
 
                     {context.favs.length && context.favs[0] !== "" ?
                       <StyledIconButton 
