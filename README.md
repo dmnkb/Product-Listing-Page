@@ -19,7 +19,7 @@
 - [React](https://reactjs.org/) via [Create React App](https://github.com/facebook/create-react-app)
 - [Typescript](https://www.typescriptlang.org/)
 - [Axios](https://www.npmjs.com/package/axios)
-- Global state management: Context API
+- State management: [React Context API](https://reactjs.org/docs/context.html)
 
 #### Design System / Styling
 - [Matierla UI](https://material-ui.com/)
