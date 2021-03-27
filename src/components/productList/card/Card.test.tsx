@@ -1,10 +1,13 @@
 import React from 'react';
 import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
-import Card from './Card';
+
 import { ThemeProvider } from 'styled-components';
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
+
 import theme from '../../../theme/theme'
+import Card from './Card';
+import { getByTestId } from '@testing-library/dom';
 
 let container: any = null;
 beforeEach(() => {
@@ -49,8 +52,8 @@ it("renders product card data", async () => {
     , container)
   });
   
-  expect(container.querySelector("[data-test-title]").textContent).toBe(fakeProductData.title)
-  expect(container.querySelector("[data-test-price]").textContent).toBe(fakeProductData.retailPrice + ",00€")
+  expect(getByTestId(container, "card-title").textContent).toBe(fakeProductData.title)
+  expect(getByTestId(container, "card-price").textContent).toBe(fakeProductData.retailPrice + ",00€")
   
   let globalRef:any = global;
   globalRef.fetch.mockRestore();

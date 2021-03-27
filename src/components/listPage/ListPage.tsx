@@ -25,7 +25,7 @@ const ListPage: React.FC = () => {
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [productData, setProductData] = useState(Object);
-  const [page, setPage] = React.useState(2);
+  const [page, setPage] = React.useState(1);
 
   // filtering
   const [gender, setGender] = React.useState('all');
@@ -151,7 +151,7 @@ const ListPage: React.FC = () => {
                     my={6}
                     >
                     <StyledPagination 
-                      count={Math.floor(productData.count / 12)} 
+                      count={Math.floor(productData.count / 12) | 1} 
                       color="primary"                         
                       page={page}
                       onChange={handleChangePage}
