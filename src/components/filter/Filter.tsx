@@ -33,8 +33,7 @@ const Filter: React.FC = () => {
   return (
     <StoreContext.Consumer>
       {( context ) => {
-        return ( 
-    
+        return (     
           <StyledFilterList className="grid s-position-relative ipad-position-sticky">
             <div className="inner">
               <div className="s-6 l-12 col">
@@ -46,6 +45,7 @@ const Filter: React.FC = () => {
                     value={context.state.gender}
                     onChange={(e) => context.dispatch({ type: 'SET_GENDER', payload: e.target.value as string })}
                     label="Gender"
+                    disabled={context.state.isLoading}
                     >
                     {genders.map((gender: any) => {
                       let key, val: string = ""
@@ -71,6 +71,7 @@ const Filter: React.FC = () => {
                     value={context.state.releaseYear}
                     onChange={(e) => context.dispatch({ type: 'SET_RELEASE_YEAR', payload: e.target.value as string })}
                     label="Release Year"
+                    disabled={context.state.isLoading}
                     >
                     {releaseYears.map((year: number) => {
                       return <MenuItem 
@@ -83,7 +84,6 @@ const Filter: React.FC = () => {
               </div>
             </div>
           </StyledFilterList>
-
         )
       }}
     </StoreContext.Consumer>
