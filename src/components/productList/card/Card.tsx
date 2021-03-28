@@ -1,5 +1,5 @@
 import React from 'react';
-import StoreContext from '../../Context'
+import { StoreContext } from '../../../state/Context'
 
 import HeartIconBorder from '@material-ui/icons/FavoriteBorder';
 import HeartIcon from '@material-ui/icons/Favorite';
@@ -23,13 +23,13 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({title, image, price, productID}) => {
   
-  /**
-   * Simulate color varants. Steps:
-   * 
-   * 1) Create an array with values from 1 to 4.
-   * 2) Shuffle that array using Fisher–Yates algorithm.
-   * 3) Fill another array with a random amount of numbers of the previous array.
-   * 4) Sort new array in order to make the colors look more harmonically.
+  // FIXME 
+  /** 
+   * Given, the API doesn't support any sort of variants and that this
+   * is a test situation, the functions below generate "fake" variants. 
+   * As of now those are generated on the fly per item causing them to update
+   * every time the card updates.
+   * However, the focus was to demonstrate :hover behavior.
    */
 
   function shuffle(a: number[]) {
@@ -52,23 +52,23 @@ const Card: React.FC<CardProps> = ({title, image, price, productID}) => {
   return (
     <StoreContext.Consumer>
       {( context ) => {
+        let isFavourite = context.state.favs ? (context.state.favs?.findIndex(x => x===productID) !== -1) : false
+        
         return ( 
           <StyledCard>
             <StyledFavoriteButton
               aria-label="favorite"
               color="primary"
-              className={`fav-button ${(context.favs.findIndex(x => x===productID) !== -1) && "faved"}`}
-              onClick={() => {
-                context.favClicked(productID)
-              }}
-              >
-                {(context.favs.findIndex(x => x===productID) !== -1) ?
-                  <HeartIcon /> :
-                  <HeartIconBorder />
-                }
+              className={`fav-button ${isFavourite && "faved"}`}
+              onClick={() => {                
+                context.dispatch({ type: 'FAV_CLICKED', payload: productID })
+              }}>
+              {isFavourite ?
+                <HeartIcon /> :
+                <HeartIconBorder />}
             </StyledFavoriteButton>
             <StyledCardActionArea>
-              {/* Id image is missing fake it for the sake of demonstration */}
+              {/* If image is missing let's fake it for the sake of demonstration */}
               <StyledCardMedia
                 image={image || "https://images.stockx.com/images/Nike-Air-Force-1-Low-Supreme-Box-Logo-White-Product.jpg?fit=fill&bg=FFFFFF&w=140&h=100&auto=format,compress&trim=color&q=90&dpr=2&updated_at=1606164536"}
                 title={title}

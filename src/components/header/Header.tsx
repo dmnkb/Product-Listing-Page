@@ -1,5 +1,5 @@
 import React from 'react';
-import StoreContext from '../Context'
+import { StoreContext } from '../../state/Context'
 
 import {
   Badge  
@@ -37,14 +37,14 @@ const Header: React.FC<HeaderPros> = ({title, handleLogoClicked}) => {
                       onClick={() => handleLogoClicked()}
                       >{title}</StyledLogo>
 
-                    {context.favs.length && context.favs[0] !== "" ?
+                    {context.state.favCount ?
                       <StyledIconButton 
                         aria-label="favorite"
                         color="primary"
                         className="fav-button"
-                        onClick={ () => context.handleComparisonOpen() }
+                        onClick={ () => context.dispatch({ type: 'SET_COMPARISON_OPEN', payload: true }) }
                         >
-                        <Badge badgeContent={context.favs.length} color="primary">
+                        <Badge badgeContent={context.state.favCount} color="primary">
                           <HeartIconBorder /> 
                         </Badge> 
                       </StyledIconButton> :
@@ -52,7 +52,7 @@ const Header: React.FC<HeaderPros> = ({title, handleLogoClicked}) => {
                         aria-label="favorite"
                         color="primary"
                         className="fav-button"
-                        onClick={ () => context.handleComparisonOpen() }
+                        onClick={ () => context.dispatch({ type: 'SET_COMPARISON_OPEN', payload: true }) }
                         >
                         <HeartIconBorder /> 
                       </StyledIconButton>

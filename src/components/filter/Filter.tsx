@@ -1,5 +1,5 @@
 import React from 'react';
-import StoreContext from '../Context'
+import { StoreContext } from '../../state/Context'
 
 import {
   FormControl,
@@ -43,8 +43,8 @@ const Filter: React.FC = () => {
                   <Select
                     labelId="demo-simple-select-outlined-label"
                     id="gender-select-outlined"
-                    value={context.gender}
-                    onChange={context.handleGenderChange}
+                    value={context.state.gender}
+                    onChange={(e) => context.dispatch({ type: 'SET_GENDER', payload: e.target.value as string })}
                     label="Gender"
                     >
                     {genders.map((gender: any) => {
@@ -68,8 +68,8 @@ const Filter: React.FC = () => {
                   <Select
                     labelId="demo-simple-select-outlined-label"
                     id="release-year-select-outlined"
-                    value={context.releaseYear}
-                    onChange={context.handleReleaseYearChange}
+                    value={context.state.releaseYear}
+                    onChange={(e) => context.dispatch({ type: 'SET_RELEASE_YEAR', payload: e.target.value as string })}
                     label="Release Year"
                     >
                     {releaseYears.map((year: number) => {

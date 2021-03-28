@@ -1,6 +1,5 @@
 @use "sass:map";
 
-@import "normalizecss/normalize";
 @import "~include-media/dist/_include-media.scss";
 @import "@material/layout-grid/mdc-layout-grid";
 
@@ -21,7 +20,7 @@ $breakpoints: (
 	),
 	iphonex: (
 		"size": 375px,
-	"class": "ipx"
+		"class": "ipx"
 	),
 	iphone12: (
 		"size": 390px,
@@ -122,7 +121,7 @@ html {
 							}
 						}
 						// offset
-						@debug "class: .col.#{map.get($breakpoints, $breakpoint, "class")}-off-#{$i}";
+						//@debug "class: .col.#{map.get($breakpoints, $breakpoint, "class")}-off-#{$i}";
 						&.#{map.get($breakpoints, $breakpoint, "class")}-off-#{$i} {
 							grid-column-start: #{$i+1};
 						}

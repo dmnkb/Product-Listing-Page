@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import StoreContext from '../Context'
+import React, { useEffect, useContext } from 'react';
+import { StoreContext } from '../../state/Context'
 
 import * as api from '../../api/Api'
 
@@ -9,7 +9,6 @@ import {
 } from '@material-ui/core'
 
 import Filter from '../filter/Filter'
-import ProductListHeader from '../productListHeader/ProductListHeader'
 import ComparisonOverlay from '../comparison/Comparison'
 import Header from '../header/Header'
 
@@ -21,140 +20,75 @@ import {
 
 const ListPage: React.FC = () => {
 
-  // general states
-  const [isError, setIsError] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [productData, setProductData] = useState(Object);
-  const [page, setPage] = React.useState(1);
-
-  // filtering
-  const [gender, setGender] = React.useState('all');
-  const [releaseYear, setReleaseYear] = React.useState(2020);
+  const { state, dispatch } = useContext(StoreContext);
   
-  // context
-  const [favs, setFavs] = React.useState(['']);
-  const [favCount, setFavCount] = React.useState(0);
-  const [comparisonOpen, setComparisonOpen] = React.useState(false);
-
   const handleLogoClicked = () => {
-    setGender('all')
-    setReleaseYear(2020)
-    setPage(1)    
-    getProducts('all', 2020)
+    dispatch({ type: 'LOGO_CLICK' })
   }
-
-  const handleChangePage = (event: React.ChangeEvent<unknown>, newPage: number) => {
-    setPage(newPage)
-    getProducts(gender as api.gender, releaseYear, newPage)
-  };
 
   const getProducts = (
     gender: api.gender,
     releaseYear: number,
     page: number = 1
     ) => {
-    setIsLoading(true)
-    api.getProducts({
-      gender: gender as api.gender,
-      sort: '',
-      releaseYear: releaseYear,
-      page: page
-    } as api.SneakerSpecs).then( (data: any) => {
-      if (data.error) {
-        console.log("Error:", data.error)
-        setIsError(true)
-      } else {
-        setProductData(data.response.data)
-      }
-      setIsLoading(false)
-    })
+      dispatch({ type: 'SET_LOADING', payload: true })
+      api.getProducts({
+        gender: gender as api.gender,
+        sort: '',
+        releaseYear: releaseYear,
+        page: state.page
+      } as api.SneakerSpecs).then( (data: any) => {
+        if (data.error) {
+          console.log("Error:", data.error)
+          dispatch({ type: 'SET_ERROR', payload: true })
+        } else {
+          dispatch({ type: 'PRODUCT_DATA_UPDATE', payload: data.response.data })
+        }
+        dispatch({ type: 'SET_LOADING', payload: false })
+      })
   }
-  
+
   useEffect(() => {
-    let arr = favs
-    favs.splice(0, 1)
-    setFavs(arr)
-    getProducts(gender as api.gender, releaseYear)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    getProducts('all', 2020)
+    // eslint-disable-next-line
   }, [])
   
   useEffect(() => {
-    setIsError(false)
-    setPage(1)
-    getProducts(gender as api.gender, releaseYear)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [gender, releaseYear])
-
-  const handleGenderChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setGender(event.target.value as string);
-    setIsLoading(true)
-  };
-
-  const handleReleaseYearChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setReleaseYear(event.target.value as number);
-    setIsLoading(true)
-  };
-
-  const favClicked = (id: string) => {
-    let tempFavs = favs
-    if ( tempFavs.findIndex(x => x===id) !== -1 ) {
-      tempFavs.splice(tempFavs.indexOf(id), 1)
-    } else {
-      tempFavs.push(id)
-    }    
-    setFavs(tempFavs)
-    setFavCount(tempFavs.length)
-  }
-
-  const handleComparisonOpen = () => {
-    setComparisonOpen(true);
-  };
-
-  const handleComparisonClose = () => {
-    setComparisonOpen(false);
-  };
+    getProducts(state.gender, state.releaseYear)
+    // eslint-disable-next-line
+  }, [state.gender, state.releaseYear, state.page])
 
   return (
-    <StoreContext.Provider value={{ 
-      favs, 
-      favClicked,
-      comparisonOpen,
-      handleComparisonOpen,
-      handleComparisonClose,
-      gender,
-      releaseYear,
-      handleGenderChange,
-      handleReleaseYearChange
-      }}>
-
+    <>
       <Header 
         title="The 👟 Shop" 
         handleLogoClicked={handleLogoClicked}
-        />
-      
+        />      
       <main className="grid">
         <div className="inner">
           <aside className="s-12 l-3 col">
             <Filter />
           </aside>
           <main className="s-12 l-9 col">
-            {isLoading ? (
+            {state.isLoading ? (
               <StyledCircularProgress />
             ) : (        
-              (!isError && productData) ? (
-                <>                
-                  <ProductListHeader resultsCount={productData.count} favCount={favCount} />
-                  <StyledProductList productData={productData.results} />
+              (!state.isError && state.productData) ? (
+                <>
+                  <StyledProductList productData={state.productData.results} />
                   <Box
                     display="flex"
                     justifyContent="center"
                     my={6}
                     >
                     <StyledPagination 
-                      count={Math.floor(productData.count / 12) | 1} 
+                      count={Math.floor(state.productData.count / 12) | 1} 
                       color="primary"                         
-                      page={page}
-                      onChange={handleChangePage}
+                      page={state.page}
+                      onChange={ 
+                        (event, newPage) => { 
+                          dispatch({ type: 'SET_PAGE', payload: newPage }) 
+                        }}
                       />
                   </Box>
                 </>
@@ -171,14 +105,8 @@ const ListPage: React.FC = () => {
           </main>
         </div>
       </main>
-
-      <ComparisonOverlay 
-        favs={favs}
-        favCount={favCount}
-        comparisonOpen={comparisonOpen}
-        />
-
-    </StoreContext.Provider>
+      <ComparisonOverlay />
+     </>
   );
 }
 
