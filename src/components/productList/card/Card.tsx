@@ -1,6 +1,8 @@
 import React from 'react';
 import { StoreContext } from '../../../state/Context'
 
+import { Tooltip } from '@material-ui/core'
+
 import HeartIconBorder from '@material-ui/icons/FavoriteBorder';
 import HeartIcon from '@material-ui/icons/Favorite';
 
@@ -52,21 +54,23 @@ const Card: React.FC<CardProps> = ({title, image, price, productID}) => {
   return (
     <StoreContext.Consumer>
       {( context ) => {
-        let isFavourite = context.state.favs ? (context.state.favs?.findIndex(x => x===productID) !== -1) : false
+        let isFavorite = context.state.favs ? (context.state.favs?.findIndex(x => x===productID) !== -1) : false
         
         return ( 
           <StyledCard>
-            <StyledFavoriteButton
-              aria-label="favorite"
-              color="primary"
-              className={`fav-button ${isFavourite && "faved"}`}
-              onClick={() => {                
-                context.dispatch({ type: 'FAV_CLICKED', payload: productID })
-              }}>
-              {isFavourite ?
-                <HeartIcon /> :
-                <HeartIconBorder />}
-            </StyledFavoriteButton>
+            <Tooltip title={isFavorite ? "Remove from saved items" : "Save to compare"}>
+              <StyledFavoriteButton
+                aria-label="favorite"
+                color="primary"
+                className={`fav-button ${isFavorite && "faved"}`}
+                onClick={() => {                
+                  context.dispatch({ type: 'FAV_CLICKED', payload: productID })
+                }}>
+                {isFavorite ?
+                  <HeartIcon /> :
+                  <HeartIconBorder />}
+              </StyledFavoriteButton>
+            </Tooltip>
             <StyledCardActionArea>
               {/* If image is missing let's fake it for the sake of demonstration */}
               <StyledCardMedia

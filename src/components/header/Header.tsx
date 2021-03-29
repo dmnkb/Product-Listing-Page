@@ -2,7 +2,8 @@ import React from 'react';
 import { StoreContext } from '../../state/Context'
 
 import {
-  Badge  
+  Badge,
+  Tooltip
 } from '@material-ui/core'
 
 import HeartIconBorder from '@material-ui/icons/FavoriteBorder';
@@ -38,24 +39,28 @@ const Header: React.FC<HeaderPros> = ({title, handleLogoClicked}) => {
                       >{title}</StyledLogo>
 
                     {context.state.favCount ?
-                      <StyledIconButton 
-                        aria-label="favorite"
-                        color="primary"
-                        className="fav-button"
-                        onClick={ () => context.dispatch({ type: 'SET_COMPARISON_OPEN', payload: true }) }
-                        >
-                        <Badge badgeContent={context.state.favCount} color="primary">
+                      <Tooltip title={`Compare ${context.state.favCount} items`}>
+                        <StyledIconButton 
+                          aria-label="favorite"
+                          color="primary"
+                          className="fav-button"
+                          onClick={ () => context.dispatch({ type: 'SET_COMPARISON_OPEN', payload: true }) }
+                          >
+                          <Badge badgeContent={context.state.favCount} color="primary">
+                            <HeartIconBorder /> 
+                          </Badge> 
+                        </StyledIconButton> 
+                      </Tooltip> :
+                      <Tooltip title={`Compare ${context.state.favCount} items`}>
+                        <StyledIconButton 
+                          aria-label="favorite"
+                          color="primary"
+                          className="fav-button"
+                          onClick={ () => context.dispatch({ type: 'SET_COMPARISON_OPEN', payload: true }) }
+                          >
                           <HeartIconBorder /> 
-                        </Badge> 
-                      </StyledIconButton> :
-                      <StyledIconButton 
-                        aria-label="favorite"
-                        color="primary"
-                        className="fav-button"
-                        onClick={ () => context.dispatch({ type: 'SET_COMPARISON_OPEN', payload: true }) }
-                        >
-                        <HeartIconBorder /> 
-                      </StyledIconButton>
+                        </StyledIconButton>
+                      </Tooltip>
                     }
                     
                   </div>
