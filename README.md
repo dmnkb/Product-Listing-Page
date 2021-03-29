@@ -11,8 +11,6 @@
 - at least 1 unit test
 - readme
 
----
-
 ## Stack
 
 #### Framework
@@ -32,18 +30,14 @@ Material UI comes with it's own grid. However, in order to increase flexibility 
 - [mdc-layout-grid](https://github.com/material-components/material-components-web/tree/master/packages/mdc-layout-grid)
 - [include-media](https://github.com/eduardoboucas/include-media)
 
----
-
 ## API
 
 With kind consent of [TG4 Solutions](https://tg4.solutions/) this project consumes their [sneaker database API](https://thesneakerdatabase.com/api).
 The app is preconfigured to search specifically for Nike Airforce 1 sneakers. The app leverages the API features of filtering by gender and release year. One thing to note here is that unfortunately it doesn't come with color variants. Therefore I decided to fake those by generating random ones.
 
----
+## Installation
 
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### `npm install`
 
 ## Available Scripts
 
