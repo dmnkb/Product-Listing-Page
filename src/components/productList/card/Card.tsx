@@ -31,7 +31,7 @@ const Card: React.FC<CardProps> = ({title, image, price, productID}) => {
    * is a test situation, the functions below generate "fake" variants. 
    * As of now those are generated on the fly per item causing them to update
    * every time the card updates.
-   * However, the focus was to demonstrate :hover behavior.
+   * However, the focus was to demonstrate styling on :hover behavior.
    */
 
   function shuffle(a: number[]) {
