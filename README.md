@@ -28,7 +28,7 @@
 - [Sass / SCSS](https://sass-lang.com/)
 
 #### Grid
-Material UI comes with it's own grid. However, in order to increase flexibility and to be more concrete in terms of breakpoints, I generate breakpoint classes generically that fit my needs.
+Material UI comes with it's own grid. However, in order to increase flexibility and to be more concrete in terms of breakpoints, I generate custom classes using Sass loops that fit my needs.
 - [mdc-layout-grid](https://github.com/material-components/material-components-web/tree/master/packages/mdc-layout-grid)
 - [include-media](https://github.com/eduardoboucas/include-media)
 
